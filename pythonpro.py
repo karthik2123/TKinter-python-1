@@ -29,7 +29,7 @@ def addrec():
     c=t3.get()
     d=t4.get()
     e=t5.get()
-    f.writelines(a+""+b+""+c+""+d+""+e+""+"\n")
+    f.writelines(a+" "+b +" "+c+" "+d+" "+e+" "+"\n")
     f.close
     
     
@@ -98,72 +98,86 @@ def firstrec():
    
     f.close()
     count=count-count
-'''def lastrec():
-    f=open("pydatabase.txt",'r')
-    global count
-    i=0
-    l=f.readline()
-    i=i+total
-    l=l.split()
+    
+def lastrec():
+    f=open("pydatabase.txt",'r')       
+    a=sum(1 for i in open("pydatabase.txt"))-1
+    print("last record is:",a+1)
+   
+    l=f.readlines()[a]
+    d=l.split()
+    s1.set(d[0])
+    s2.set(d[1])
+    s3.set(d[2])
+    s4.set(d[3])
+    s5.set(d[4])
+    f.close()
+   
     
 
    
-    s1.set(l[0])
-    s2.set(l[1])
-    s3.set(l[2])
-    s4.set(l[3])
-    s5.set(l[4])
-   
-    f.close()
-    count=total'''
+
 def delrec():
-     f=open("pydatabase.txt",'a+')
-     d=f.readlines()
-     a=t1.get()
-     b=t2.get()
-     c=t3.get()
-     x=t4.get()
-     y=t5.get()
+     with open("pydatabase.txt",'r') as f:
+         d=f.readlines()
+    
+     new = []
+     for line in d:
+         data = line.strip().split()
+         if len(data)!=0 and data[2] != t3.get(): new.append(line)
+     with open("pydatabase.txt",'w') as fp:
+         for line in new:   
+             fp.write(line)
      
      
-     if d==(a+b+c+x+y):
-        f.write("")
-        s1.set("")
+     
         
-     #f.truncate()
-     f.close()
+    
 def search():
-    f=open("pydatabase.txt",'r')
-    global count
-    i=0
-    
-    while(i<=count):
-        
-        l=f.readline()
-        i=i+1
-        l=l.split()
-    c=t3.get()
-    s3.find(c)
-
-   
-    s1.set(l[0])
-    s2.set(l[1])
-    s3.set(l[2])
-    s4.set(l[3])
-    s5.set(l[4])
-   
+    entryid=s3.get()
+    print(entryid)
+    f=open("pydatabase.txt",'r')       
+    l=f.readlines()
+    for i in l:
+        d=i.split()
+        print(d)
+        if(d[2]==entryid):
+            
+            s1.set(d[0])
+            s2.set(d[1])
+            s3.set(d[2])
+            s4.set(d[3])
+            s5.set(d[4])
     f.close()
-    count=count+1
-   
+
+def update():
+    a1=t1.get()
+    b2=t2.get()
+    c3=t3.get()
+    d4=t4.get()
+    e5=t5.get()
+    with open("pydatabase.txt",'r') as f:
+        d=f.readlines()
+        
+    new = []
+    for line in d:
+        data = line.strip().split()
+        if len(data)!=0 and data[2] != c3: new.append(line)
+        else:
+            new.append(str(a1)+' '+str(b2)+' '+str(c3)+' '+str(d4)+' '+str(e5)+"\n")
+    with open("pydatabase.txt",'w') as fp:
+        for line in new:                
+            fp.write(line)
     
+            
     
 b1=Button(w,text="|<",command=firstrec)
 b2=Button(w,text="<",command=prevrec)
 b3=Button(w,text=">",command=nextrec)
-b4=Button(w,text=">|")
+b4=Button(w,text=">|",command=lastrec)
 b5=Button(w,text="ADD",command=addrec)
 b6=Button(w,text="DELETE",command=delrec)
-b7=Button(w,text="UPDATE")
+b7=Button(w,text="UPDATE",command=update)
 b8=Button(w,text="SEARCH",command=search)
 
 l1.grid(row=1,column=1)
