@@ -1,0 +1,42 @@
+import time
+name=input("your name:")
+print("WELCOME"+name+"\n"+"ready to play HANGMAN")
+
+ques="Heloy"
+ls=list(ques)
+print(ls)
+ln=len(ques)
+count=ln-ln
+print(count)
+res=0
+lo=['_','_','_','_','_']
+print(lo)
+def check():
+       
+        for count in range(len(ques)):
+            if(ls[count]==charac):
+                time.sleep(3)
+                print("rt guess")
+                lo[count]=charac
+                print(lo)
+                break;
+        else:
+            print("try again")
+        time.sleep(5)
+                
+for i in range(10):
+    print("guess char in mind")
+    time.sleep(5)
+    charac=input("now write character here:")
+    
+    print("charac is",charac)
+    
+    
+    check()
+    
+   
+
+
+
+    
+
